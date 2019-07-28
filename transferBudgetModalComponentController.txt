@@ -1,0 +1,46 @@
+({
+    doInit: function(component, event, helper){
+        helper.doInitHelper(component, event, helper);
+    },
+    
+    closeTransferBudgetModal : function(component, event, helper) {
+        helper.closeTransferBudgetModal(component, event, helper);
+    },
+    showTransferBudgetModalToast : function(component, event, helper) {
+        component.set("v.showSpinner", true);
+        helper.showTransferBudgetModalToast(component, event, helper);
+    },
+    clearDetails : function(component, event, helper){
+        helper.clearDetails(component, event, helper);
+    },
+    autoAllocate : function(component, event, helper){
+        helper.autoAllocate(component, event, helper);
+    },
+    searchOrgUnit : function(component, event, helper){
+        helper.searchOrgUnitHelper(component, event, helper);
+    },
+    /*searchOrganizationUnitOnLinkClick : function(component, event, helper){
+        helper.searchOrganizationUnitOnLinkClick(component, event, helper);
+    },*/
+    
+    handleSelectMenuButton : function(component, event, helper){
+        helper.handleSelectMenuButtonHelper(component, event, helper);
+    },
+    handleInteractionCompEvent : function(component, event, helper){
+        var action = event.getParam( 'action' );
+        var payload = event.getParam( 'payload' );
+        var willHandle = _.find( component.get('v.willHandleCompActions'), function( a ) {
+            return a === action
+        });
+        if ($A.util.isEmpty( action ) || $A.util.isEmpty( willHandle ))
+            return;
+        
+        helper.handleCompEvent( component, event, helper );
+    },
+    
+    changeOrganizationUnit: function(component, event, helper){
+        component.set('v.context','CHANGE_ORG_TRANSFER_BUDGET');
+        document.body.setAttribute('style', 'overflow: hidden');
+        component.set('v.showSearchAddOrgUnitModal',true);
+    }
+})

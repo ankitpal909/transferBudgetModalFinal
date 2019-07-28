@@ -1,0 +1,4 @@
+<design:component>
+    <design:attribute name="deleteBudgetActionVisibility" datasource="Show,Hide" default="Show" label="Delete Budget Action Visibility" 
+                      description="Determines whether users are allowed to delete a budget(s)" />
+</design:component>

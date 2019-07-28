@@ -1,0 +1,34 @@
+({
+    /*handleClick : function(component, event, helper) {
+        var cmpEvent = component.getEvent("interactionCompEvent");
+        cmpEvent.setParams({
+            "action" : "showTransferBudgetCommentModal"
+        });
+        cmpEvent.fire();
+    },*/
+    
+    doInitHelper : function (component, event, helper){
+        var fromOrgUnit = component.get('v.fromOrgUnit');       
+       /* var budgetWrapperArray = [{
+            count: count,
+            amount: amount
+        }]; */
+        if(!$A.util.isEmpty(fromOrgUnit)){
+            _.forEach(fromOrgUnit, function(lowLevel){
+                lowLevel.count = '';
+                lowLevel.amount='';
+            });
+        component.set('v.fromOrgUnit',fromOrgUnit);
+    }
+        
+    },
+    handleClick : function(component, event, helper){
+        component.set("v.showTransferBudgetCommentModal", true);
+    },
+    handleInteractionCompEvent : function(component, event, helper){
+        var action = event.getParam( 'action' );
+        if(action=='showTransferBudgetCommentModal'){
+            component.set("v.showTransferBudgetCommentModal", false);
+        }
+    },
+})

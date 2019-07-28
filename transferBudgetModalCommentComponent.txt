@@ -1,0 +1,107 @@
+<aura:component implements="lightning:actionOverride,force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+    <aura:attribute name="showTransferBudgetCommentModal" type="Boolean" default="true"/>
+    <aura:attribute name="showSpinner" type="Boolean" default="false"/>
+    <aura:attribute name="comment" type="String" />
+    
+    <!--register event ..-->    
+    <aura:registerEvent name="interactionCompEvent" type="c:interactionCompEvent" />
+    <!--register event ..-->
+    
+    
+    
+    <div>
+        <section role="dialog" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ahm-commentBoxPosition slds-nubbin_right">
+                <div class="ahm-sizeOfCommentDiv slds-theme_default">
+                    <div class="slds-form-element">
+                        
+                        <div class="slds-grid">
+                            <span class="slds-text-heading_medium slds-align_absolute-center">
+                                <label class="slds-form-element__label" for="textarea-id-01">Comments</label>
+                            </span>
+                            <span>
+                                <lightning:icon iconName="utility:clear" class="slds-float_right" size="x-small" onclick="{!c.cancel}" />
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control">
+                            <textarea id="textarea-id-01" class="slds-textarea ahm-sizeTextArea" placeholder="Placeholder Text"></textarea>
+                        </div>
+                        <span class="{!v.showSpinner ? 'slds-hide' : 'slds-show slds-float_right'}">
+                            <button class="slds-button slds-button_neutral" onclick="{!c.cancel}">Cancel</button>
+                            <button class="slds-button slds-button_brand" onclick="{!c.save}">Save</button>
+                        </span>
+                        <div class="{!v.showSpinner ? 'slds-is-relative slds-p-around_medium slds-float_right':'slds-hide'}">
+                            <lightning:spinner variant="brand" size="small"/>
+                        </div>
+                        
+                    </div>
+                </div>   
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- <div>
+        <div class="slds-box ahm-commentBox">
+            <span>
+                <lightning:icon iconName="utility:clear" class="slds-float_right" size="x-small" onclick="{!c.cancel}" />
+            </span>
+            <aura:if isTrue="{!v.showTransferBudgetCommentModal}">
+                <div class="slds-card">
+            <header class="slds-modal__header slds-p-around_xxx-small">
+                <div class="slds-text-heading_medium">
+                    Comments
+                    <lightning:icon iconName="utility:clear" class="slds-float_right" size="small" onclick="{!c.cancel}" />
+                </div>
+            </header>
+            <header class="slds-modal__header" />-->
+    <!--<div class="slds-modal__content" >
+                <lightning:inputRichText value="{!v.comment}" placeholder="comment .."/>-->
+    <!--    <textarea id="textarea-id-01" class="slds-textarea" placeholder="Placeholder Text"></textarea>
+            </div>
+            <span class="{!v.showSpinner ? 'slds-hide' : 'slds-show slds-float_right'}">
+                <button class="slds-button slds-button_neutral" onclick="{!c.cancel}">Cancel</button>
+                <button class="slds-button slds-button_brand" onclick="{!c.save}">Save</button>
+            </span>
+            <div class="{!v.showSpinner ? 'slds-is-relative slds-p-around_medium slds-float_right':'slds-hide'}">
+                <lightning:spinner class="ahm-Spinner-Background" variant="brand" size="small"/>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop_open"></div>-->
+    <!-- <div class="ahm-sizeOfCommentDiv slds-theme_default">
+                    <div class="slds-form-element">
+                        
+                        <div class="slds-grid">
+                            <span class="slds-text-heading_medium slds-align_absolute-center">
+                                <label class="slds-form-element__label" for="textarea-id-01">Comments</label>
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control">
+                            <textarea id="textarea-id-01" class="slds-textarea ahm-sizeTextArea" placeholder="Placeholder Text"></textarea>
+                        </div>
+                        <span class="{!v.showSpinner ? 'slds-hide' : 'slds-show slds-float_right'}">
+                            <button class="slds-button slds-button_neutral" onclick="{!c.cancel}">Cancel</button>
+                            <button class="slds-button slds-button_brand" onclick="{!c.save}">Save</button>
+                        </span>
+                        <div class="{!v.showSpinner ? 'slds-is-relative slds-p-around_medium slds-float_right':'slds-hide'}">
+                            <lightning:spinner class="ahm-Spinner-Background" variant="brand" size="small"/>
+                        </div>
+                        
+                    </div>
+                </div>        
+            </aura:if>
+        </div>
+    </div>-->
+</aura:component>

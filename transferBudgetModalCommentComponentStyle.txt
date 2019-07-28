@@ -1,0 +1,20 @@
+.THIS .ahm-Spinner-Background{
+    background-color: rgb(243, 242, 242);
+}
+
+.THIS .ahm-commentBox{
+    margin-right: 5rem;    
+}
+
+.THIS .ahm-sizeOfCommentDiv{
+    width: 25rem;
+    height: 15rem;
+}
+
+.THIS .ahm-sizeTextArea{    
+    height: 11rem;
+}
+
+.THIS .ahm-commentBoxPosition{
+    float: right;
+}

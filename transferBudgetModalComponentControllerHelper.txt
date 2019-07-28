@@ -1,0 +1,124 @@
+({
+    
+    doInitHelper : function(component, event, helper) {
+        var orgUnitFieldsForLabels = component.get('v.orgUnitFieldsForLabels');
+        var fieldLabelJson = {};
+        
+        //Setting null values for labels
+        _.forEach(orgUnitFieldsForLabels, function(fieldApiName){
+            fieldLabelJson[fieldApiName] = null;
+        });
+        
+        var orgUnitFieldJson = [{ objectName: "Organization_Unit__c", fieldLabels: fieldLabelJson }];
+        var attributesWithPath = [{name: 'orgUnitLabels', path: { 'objectName': 'Organization_Unit__c' }}];
+        
+        helper.getLabels(component, helper, orgUnitFieldJson, attributesWithPath, helper.populateInitialData);
+        component.get('v.orgUnitLabels');
+        
+    },
+    
+    populateInitialData: function( component, helper ) {
+        var orgUnitLabels = component.get('v.orgUnitLabels');
+        
+        if($A.util.isUndefinedOrNull( orgUnitLabels )) 
+            return;
+    },
+    
+    closeTransferBudgetModal : function(component, event, helper) {
+        //component.set("v.showTransferModal", false);
+        var cmpEvent = component.getEvent("interactionCompEvent");
+        document.body.setAttribute('style', 'overflow: visible');
+        cmpEvent.setParams({
+            "action" : "CLOSE_TRANSFER_BUDGET_MODAL"
+        });
+        cmpEvent.fire();
+    },
+    showTransferBudgetModalToast : function(component, event, helper) {
+        var toastEvent = $A.get("e.force:showToast");
+        document.body.setAttribute('style', 'overflow: visible');
+        toastEvent.setParams({
+            message: 'Budget has been allocated'
+        });
+        toastEvent.fire();
+        component.set("v.showSpinner", false);
+        component.set("v.showTransferModal", false);
+    },
+    /*clearDetails : function(component, event, helper){
+        component.set("v.budgetAllocationHistoryOrganizationUnit", null);
+        component.set("v.budgetAllocationHistoryOrganizationUnitPhone", null);
+    },*/
+    autoAllocate : function(component, event, helper){
+        var toOrgUnit = component.get("v.toOrgUnit").length;
+        var allocatedAmount = component.get("v.amount");
+        var count=component.get("v.count");
+        allocatedAmount = (allocatedAmount/toOrgUnit).toFixed(2);
+        var allocatedCount = (count/toOrgUnit).toFixed(2);
+        component.set("v.allocatedAmount", allocatedAmount);
+        component.set("v.allocatedCount", allocatedCount);
+    },
+    searchOrgUnitHelper : function(component, event, helper){
+        component.set('v.context','SEARCH_ORG_FOR_TRANSFER_BUDGET');
+        document.body.setAttribute('style', 'overflow: hidden');
+        component.set('v.showSearchAddOrgUnitModal',true);
+    },
+    /*searchOrganizationUnitOnLinkClick : function (component, event, helper) {
+        var searchOrganizationUnitEvent = $A.get("e.force:navigateToURL");
+        searchOrganizationUnitEvent.setParams({
+            "url": "https://ahmopd3-dev-ed.lightning.force.com/lightning/n/Home"
+        });
+        searchOrganizationUnitEvent.fire();
+    },*/    
+    handleSelectMenuButtonHelper : function(component, event , helper){
+        
+        var selectedMenuItem =event.getParam('value');
+        var amountIN=component.get('v.amountIn');
+        if(selectedMenuItem=='DOLLER' && amountIN=='RUP'){
+            var amount= component.get('v.amount');
+            var allocatedAmount = component.get("v.allocatedAmount");
+            var amountInRupees=(amount/70).toFixed(2);
+            var allocatedAmountInRupees = (allocatedAmount/70).toFixed(2);
+            component.set('v.amount',amountInRupees);
+            component.set('v.allocatedAmount',allocatedAmountInRupees);
+            component.set('v.amountIn','USD');
+        }
+        else if(selectedMenuItem=='RUPEE' && amountIN=='USD'){
+            var amount= component.get('v.amount');
+            var allocatedAmount = component.get("v.allocatedAmount");
+            var amountInRupees=(amount*70).toFixed(2);
+            var allocatedAmountInRupees = (allocatedAmount*70).toFixed(2);
+            component.set('v.amount',amountInRupees);
+            component.set('v.allocatedAmount',allocatedAmountInRupees);
+            component.set('v.amountIn','RUP');
+        }
+    },
+    
+    handleCompEvent : function(component, event, helper){
+        var action = event.getParam( 'action' );
+        var payload = event.getParam('payload');
+        switch (action) {
+            case 'TRANSFER_BUDGET_SEARCH_ORG_DATA':
+                var toOrgUnit = payload;       
+                if(!$A.util.isEmpty(toOrgUnit)){
+                    _.forEach(toOrgUnit, function(lowLevel){
+                        lowLevel.count = '';
+                        lowLevel.amount='';
+                    });
+                    component.set('v.toOrgUnit',toOrgUnit);
+                    component.set('v.showSearchAddOrgUnitModal', false);
+                }
+                event.stopPropagation();
+                break;
+            case 'TRANSFER_BUDGET_CHANGE_ORG_DATA':
+                
+                var fromOrgUnit = payload; 
+                component.set('v.fromOrgUnit',fromOrgUnit);
+                component.set('v.showSearchAddOrgUnitModal', false);
+                
+                event.stopPropagation();
+                break;                 
+                
+            default:
+                break;
+        }
+    }
+})

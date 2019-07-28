@@ -1,0 +1,87 @@
+.THIS .ahm-textoutputBackground{
+    background-color: #FFFACD;
+    height: 2rem;
+    padding-top: 0.5rem;
+    width: 28.5em;
+}
+
+.THIS .ahm-transferBudgetModalInnerBox{
+    height: 2rem;
+    padding-top: 1rem   
+}
+
+.THIS .ahm-regularTextForInnerBox{
+    line-height: 1rem;
+}
+
+.THIS .ahm-TableOuterBox{
+    line-height: 4.1rem;
+    padding-right: 1rem;
+}
+
+.THIS .ahm-boxContent{
+    padding-bottom: 0rem;
+    padding-top: 0rem;
+}
+
+.THIS  .tooltip > .tooltiptext {
+    display:none;
+}
+
+.THIS .ahm-icon {
+    display: inline-block;
+    position: relative;
+}
+
+.THIS .ahm-menuItem{
+    width: 1.71rem;
+    height: 1.71rem;
+}
+
+.THIS .ahm-notification{
+    background-color:Orange;
+    border-radius: 1rem;
+    color: black;
+    
+    padding: 0.1rem;
+    font-size:0.7rem;
+    
+    position: absolute; 
+    top:-0.5rem;
+    right: 0rem;
+}
+
+/*.THIS .ahm-popup{
+transform: translateY(-6em);
+}*/
+
+/*.THIS .ahm-popoverAmount{
+transform: translateY(-7rem);
+}*/
+
+/*.THIS .ahm-popoverName{
+transform: translateY(-5em);
+}*/
+
+.THIS .ahm-button{
+    margin-right: 0.4rem;
+}
+
+.THIS .ahm-allocateToTextAlign{
+    margin-top: 1em;
+}
+
+.THIS .tooltip:hover .tooltiptext{
+    display: block;
+    position: absolute;
+    z-index: 1;
+    overflow: visible;
+    width: auto;
+    height: auto;
+    background-color:#002966;
+    text-align: left;
+    padding:1rem;
+    color: white;
+    transform: translateY(-6em);
+    
+}

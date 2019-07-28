@@ -1,0 +1,8 @@
+<design:component>
+    <design:attribute name="searchOrganizationUnitHelpTextType" default="Helptext : Search Organization Unit" 
+                      label="Search Organization Unit Help Text Type" 
+                      description="Defines the instructional text that will be displayed in the component." />
+    <design:attribute name="searchOrganizationUnitHelpTextVisibility" datasource="Show,Hide" default="Show" 
+                      label="Search Organization Unit Help Text Visibility" 
+                      description="Determine whether the instructional text will be shown in the component." /> 
+</design:component>
